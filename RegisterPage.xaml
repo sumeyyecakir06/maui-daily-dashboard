@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.RegisterPage"
+             Title="Kayıt Ol">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" 
+                             Padding="30"
+                             VerticalOptions="Center">
+
+            <Label Text="Kayıt Ol"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"/>
+
+            <VerticalStackLayout Spacing="15">
+                <Entry x:Name="UsernameEntry"
+                       Placeholder="Kullanıcı Adı"
+                       HeightRequest="50"
+                       TextChanged="OnEntryTextChanged"/>
+
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Email"
+                       Keyboard="Email"
+                       HeightRequest="50"
+                       TextChanged="OnEntryTextChanged"/>
+
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Parola"
+                       IsPassword="True"
+                       HeightRequest="50"
+                       TextChanged="OnEntryTextChanged"/>
+            </VerticalStackLayout>
+
+            <Button x:Name="RegisterButton"
+                    Text="Kayıt Ol"
+                    IsEnabled="False"
+                    Clicked="OnRegisterButtonClicked"
+                    HeightRequest="50"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="10">
+                <Button Text="Giriş Yap"
+                        WidthRequest="100"
+                        Clicked="OnGotoLoginPageButtonClicked"/>
+                <Button Text="İptal"
+                        WidthRequest="100"
+                        Clicked="CancelButtonClicked"/>
+            </HorizontalStackLayout>
+
+            <Button Text="Zaten bir hesabın var mı? Giriş Yap"
+                    BackgroundColor="Transparent"
+                    TextColor="Blue"
+                    Clicked="OnGotoLoginPageButtonClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

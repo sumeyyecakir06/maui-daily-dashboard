@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.AddToDoPage"
+             Title="Görev Detay"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Başlık -->
+            <Label Text="Görev Başlığı"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#333333"/>
+
+            <Border Stroke="#6200EE"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="White"
+                    Padding="10">
+                <Entry Text="{Binding Todo.Title}"
+                       Placeholder="Görev başlığını girin"
+                       BackgroundColor="Transparent"
+                       HeightRequest="40"/>
+            </Border>
+
+            <!-- Açıklama -->
+            <Label Text="Açıklama"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#333333"/>
+
+            <Border Stroke="#6200EE"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="White"
+                    Padding="10"
+                    HeightRequest="100">
+                <Editor Text="{Binding Todo.Description}"
+                        Placeholder="Görev açıklamasını girin"
+                        BackgroundColor="Transparent"
+                        AutoSize="TextChanges"/>
+            </Border>
+
+            <!-- Tarih ve Saat -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Tarih"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+
+                    <Border Stroke="#6200EE"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="White"
+                            Padding="10">
+                        <DatePicker Date="{Binding Todo.Date}"
+                                    BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Saat"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+
+                    <Border Stroke="#6200EE"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="White"
+                            Padding="10">
+                        <TimePicker Time="{Binding Todo.Time}"
+                                    BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Tamamlandı mı? -->
+            <Border Stroke="#6200EE"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="White"
+                    Padding="15">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0"
+                           Text="Tamamlandı mı?"
+                           VerticalOptions="Center"
+                           FontSize="16"/>
+
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding Todo.IsCompleted}"
+                              VerticalOptions="Center"
+                              Color="#6200EE"/>
+                </Grid>
+            </Border>
+
+            <!-- Butonlar -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <!-- Kaydet Butonu -->
+                <Button Grid.Column="0"
+                        Text="💾 KAYDET"
+                        BackgroundColor="#6200EE"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Clicked="OnSaveTodoClicked"/>
+
+                <!-- Sil Butonu -->
+                <Button Grid.Column="1"
+                        Text="🗑️ SİL"
+                        BackgroundColor="#FF3B30"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Clicked="OnDeleteTodoClicked"
+                        IsVisible="{Binding IsNotNew}"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.DovizKurlari"
+             Title="Güncel Kurlar"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Yenile" IconImageSource="refresh.png" Clicked="BtnYenile_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- ÜST BAR -->
+        <Grid Grid.Row="0" Padding="15,10" BackgroundColor="{AppThemeBinding Light=#6200EE, Dark=#3700B3}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                <Label x:Name="lblTitle" Text="Piyasalar" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                <Label x:Name="lblDate" Text="Yükleniyor..." FontSize="12" TextColor="#E0E0E0"/>
+            </VerticalStackLayout>
+
+            <ActivityIndicator Grid.Column="1" 
+                               x:Name="loadingIndicator"
+                               IsRunning="False"
+                               IsVisible="False"
+                               Color="White"
+                               HeightRequest="30"
+                               WidthRequest="30"/>
+        </Grid>
+
+        <!-- LİSTE -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15" Padding="0,10">
+
+                <!-- BAŞLIK SATIRI (Sabit) -->
+                <Grid ColumnDefinitions="2*, 1.5*, 1.5*, 1.2*, 0.8*" Padding="15,5">
+                    <Label Text="BİRİM" FontSize="11" TextColor="Gray" FontAttributes="Bold"/>
+                    <Label Grid.Column="1" Text="ALIŞ" FontSize="11" TextColor="Gray" FontAttributes="Bold" HorizontalOptions="End"/>
+                    <Label Grid.Column="2" Text="SATIŞ" FontSize="11" TextColor="Gray" FontAttributes="Bold" HorizontalOptions="End"/>
+                    <Label Grid.Column="3" Text="DEĞ." FontSize="11" TextColor="Gray" FontAttributes="Bold" HorizontalOptions="End"/>
+                    <Label Grid.Column="4" Text="YÖN" FontSize="11" TextColor="Gray" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </Grid>
+
+                <!-- 1. DÖVİZLER -->
+                <VerticalStackLayout>
+                    <Label Text="DÖVİZ KURLARI" Margin="15,0,0,5" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#333, Dark=#AAA}"/>
+                    <CollectionView x:Name="DovizList" SelectionMode="None" HeightRequest="200">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="2*, 1.5*, 1.5*, 1.2*, 0.8*" Padding="15,12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
+                                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                        <Label Text="{Binding Isim}" FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light=Black, Dark=White}" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Kod}" FontSize="11" TextColor="Gray"/>
+                                    </VerticalStackLayout>
+
+                                    <Label Grid.Column="1" Text="{Binding DisplayForexBuying}" FontSize="13" TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="{Binding DisplayForexSelling}" FontSize="13" TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" HorizontalOptions="End" VerticalOptions="Center"/>
+
+                                    <!-- Fark (Değişim) -->
+                                    <Label Grid.Column="3" Text="{Binding Fark}" FontSize="12" TextColor="{Binding YonColor}" HorizontalOptions="End" VerticalOptions="Center" FontAttributes="Bold"/>
+
+                                    <!-- Yön Oku -->
+                                    <Label Grid.Column="4" Text="{Binding Yon}" FontSize="16" TextColor="{Binding YonColor}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                    <!-- Alt Çizgi -->
+                                    <BoxView Grid.ColumnSpan="5" HeightRequest="1" Color="{AppThemeBinding Light=#F0F0F0, Dark=#333}" VerticalOptions="End"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- 2. ALTINLAR -->
+                <VerticalStackLayout>
+                    <Label Text="ALTIN &amp; GÜMÜŞ" Margin="15,0,0,5" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#333, Dark=#AAA}"/>
+                    <CollectionView x:Name="AltinList" SelectionMode="None" HeightRequest="200">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="2*, 1.5*, 1.5*, 1.2*, 0.8*" Padding="15,12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
+                                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                        <Label Text="{Binding Isim}" FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light=Black, Dark=White}" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Kod}" FontSize="11" TextColor="Gray"/>
+                                    </VerticalStackLayout>
+
+                                    <Label Grid.Column="1" Text="{Binding DisplayForexBuying}" FontSize="13" TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="{Binding DisplayForexSelling}" FontSize="13" TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                    <Label Grid.Column="3" Text="{Binding Fark}" FontSize="12" TextColor="{Binding YonColor}" HorizontalOptions="End" VerticalOptions="Center" FontAttributes="Bold"/>
+                                    <Label Grid.Column="4" Text="{Binding Yon}" FontSize="16" TextColor="{Binding YonColor}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                    <BoxView Grid.ColumnSpan="5" HeightRequest="1" Color="{AppThemeBinding Light=#F0F0F0, Dark=#333}" VerticalOptions="End"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- 3. KRİPTO & BIST (YENİ EKLENDİ) -->
+                <VerticalStackLayout>
+                    <Label Text="KRİPTO &amp; BIST" Margin="15,0,0,5" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#333, Dark=#AAA}"/>
+                    <CollectionView x:Name="KriptoList" SelectionMode="None" HeightRequest="150">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="2*, 1.5*, 1.5*, 1.2*, 0.8*" Padding="15,12" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
+                                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                        <Label Text="{Binding Isim}" FontAttributes="Bold" FontSize="13" TextColor="{AppThemeBinding Light=Black, Dark=White}" LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Kod}" FontSize="11" TextColor="Gray"/>
+                                    </VerticalStackLayout>
+
+                                    <Label Grid.Column="1" Text="{Binding DisplayForexBuying}" FontSize="13" TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="{Binding DisplayForexSelling}" FontSize="13" TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                    <Label Grid.Column="3" Text="{Binding Fark}" FontSize="12" TextColor="{Binding YonColor}" HorizontalOptions="End" VerticalOptions="Center" FontAttributes="Bold"/>
+                                    <Label Grid.Column="4" Text="{Binding Yon}" FontSize="16" TextColor="{Binding YonColor}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                    <BoxView Grid.ColumnSpan="5" HeightRequest="1" Color="{AppThemeBinding Light=#F0F0F0, Dark=#333}" VerticalOptions="End"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- Alt Boşluk -->
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

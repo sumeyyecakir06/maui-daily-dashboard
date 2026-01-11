@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.TodoPage"
+             Title="Yapılacaklar"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1E1E1E}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Başlık -->
+        <Border Grid.Row="0"
+                BackgroundColor="#6200EE"
+                Padding="15">
+            <HorizontalStackLayout>
+                <Label Text="📝"
+                       FontSize="24"
+                       VerticalOptions="Center"
+                       Margin="0,0,10,0"/>
+                <Label Text="Yapılacaklar Listesi"
+                       TextColor="White"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- Todo Listesi -->
+        <RefreshView Grid.Row="1"
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView x:Name="lstTodo"
+                            ItemsSource="{Binding TodoList}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnTodoSelected">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="10,5"
+                               Padding="15"
+                               CornerRadius="10"
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#2D2D2D}"
+                               HasShadow="True">
+
+                            <Grid ColumnDefinitions="Auto,*,Auto"
+                                  RowDefinitions="Auto,Auto,Auto">
+
+                                <!-- İkon -->
+                                <Label Grid.RowSpan="3"
+                                       Text="{Binding Icon}"
+                                       FontSize="20"
+                                       VerticalOptions="Center"
+                                       Margin="0,0,10,0"/>
+
+                                <!-- Başlık -->
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding FormattedTitle}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                                       VerticalOptions="Center"/>
+
+                                <!-- CheckBox -->
+                                <CheckBox Grid.Row="0" Grid.Column="2"
+                                          IsChecked="{Binding IsCompleted}"
+                                          Color="{Binding StatusColor}"
+                                          VerticalOptions="Center"
+                                          CheckedChanged="OnCheckBoxChanged"/>
+
+                                <!-- Açıklama -->
+                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                       Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"
+                                       LineBreakMode="WordWrap"
+                                       MaxLines="2"/>
+
+                                <!-- Tarih ve Durum -->
+                                <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                                       Spacing="10">
+                                    <Label Text="{Binding FormattedDateTime}"
+                                           FontSize="12"
+                                           TextColor="{AppThemeBinding Light=#888888, Dark=#AAAAAA}"/>
+
+                                    <Label Text="{Binding StatusText}"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding StatusColor}"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!-- Boş liste -->
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 Padding="40"
+                                 Spacing="20">
+                        <Label Text="📝"
+                               FontSize="60"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Henüz görev eklenmemiş"
+                               FontSize="18"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Yeni görev eklemek için '+' butonuna tıklayın"
+                               FontSize="14"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Yeni Görev Butonu -->
+        <Button Grid.Row="2"
+                Text="+"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                FontSize="24"
+                WidthRequest="60"
+                HeightRequest="60"
+                CornerRadius="30"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="20"
+                Clicked="AddNewTodo_Clicked"/>
+
+    </Grid>
+</ContentPage>

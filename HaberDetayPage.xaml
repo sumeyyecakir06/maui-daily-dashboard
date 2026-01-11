@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.HaberDetayPage"
+             Title="Haber Detay"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Paylaş" 
+                    IconImageSource="share_icon.png"
+                    Clicked="PaylasClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0" Padding="0">
+
+            <!-- Haber Görseli -->
+            <Frame x:Name="resimFrame"
+                   Padding="0"
+                   Margin="0"
+                   CornerRadius="0"
+                   HasShadow="False"
+                   IsVisible="False">
+                <Image x:Name="resimImage"
+                       Aspect="AspectFill"
+                       HeightRequest="250"/>
+            </Frame>
+
+            <!-- Placeholder görsel yoksa -->
+            <Frame x:Name="placeholderFrame"
+                   Padding="0"
+                   Margin="0"
+                   CornerRadius="0"
+                   BackgroundColor="#E8EAF6"
+                   HasShadow="False"
+                   HeightRequest="250"
+                   IsVisible="False">
+                <Label Text="📰"
+                       FontSize="80"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Opacity="0.3"/>
+            </Frame>
+
+            <!-- İçerik Bölümü -->
+            <VerticalStackLayout Spacing="15" 
+                               Padding="20"
+                               BackgroundColor="White">
+
+                <!-- Kategori Badge -->
+                <Frame x:Name="kategoriBadge"
+                       Padding="10,5"
+                       CornerRadius="15"
+                       BackgroundColor="#E8EAF6"
+                       HasShadow="False"
+                       HorizontalOptions="Start">
+                    <Label x:Name="kategoriLabel"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="#6200EE"/>
+                </Frame>
+
+                <!-- Haber Başlığı -->
+                <Label x:Name="baslikLabel"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#212121"
+                       LineBreakMode="WordWrap"/>
+
+                <!-- Tarih ve Zaman -->
+                <Grid ColumnDefinitions="Auto,*">
+                    <Image Grid.Column="0"
+                           Source="clock_icon.png"
+                           HeightRequest="16"
+                           WidthRequest="16"
+                           VerticalOptions="Center"
+                           Margin="0,0,8,0"/>
+                    <Label Grid.Column="1"
+                           x:Name="tarihLabel"
+                           FontSize="13"
+                           TextColor="#757575"
+                           VerticalOptions="Center"/>
+                </Grid>
+
+                <!-- Ayırıcı Çizgi -->
+                <BoxView HeightRequest="1"
+                         BackgroundColor="#E0E0E0"
+                         Margin="0,5"/>
+
+                <!-- Haber İçeriği -->
+                <Label x:Name="icerikLabel"
+                       FontSize="16"
+                       TextColor="#424242"
+                       LineBreakMode="WordWrap"
+                       LineHeight="1.5"/>
+
+            </VerticalStackLayout>
+
+            <!-- Orijinal Link Bölümü -->
+            <Frame BackgroundColor="White"
+                   Padding="20"
+                   Margin="0,10,0,0"
+                   CornerRadius="0"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="📱 Orijinal Haberi Oku"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+
+                    <Frame BackgroundColor="#F5F5F5"
+                           Padding="15"
+                           CornerRadius="10"
+                           HasShadow="False">
+                        <Label x:Name="linkLabel"
+                               FontSize="14"
+                               TextColor="#6200EE"
+                               TextDecorations="Underline"
+                               LineBreakMode="TailTruncation">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="LinkTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+
+                    <Button Text="Tarayıcıda Aç"
+                            BackgroundColor="#6200EE"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Clicked="LinkTapped"
+                            Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

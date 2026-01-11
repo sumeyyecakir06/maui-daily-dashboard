@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.SettingsPage"
+             Title="Ayarlar"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+          
+
+            <!-- Tema Ayarları -->
+            <Border Stroke="#6200EE"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#2D2D2D}"
+                    Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="🎨 Tema Ayarları"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="🌙 Koyu Tema"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+
+                        <Switch x:Name="ThemeSwitch"
+                                Grid.Column="1"
+                                Toggled="OnThemeToggled"
+                                VerticalOptions="Center"
+                                OnColor="#6200EE"/>
+                    </Grid>
+
+                    <Label Text="Uygulama temasını değiştirir"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                </VerticalStackLayout>
+            </Border>
+
+            
+
+            <!-- Çıkış Yap Butonu -->
+            <Button Text="🚪 Çıkış Yap"
+                    BackgroundColor="#FF3B30"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Clicked="OnLogoutClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

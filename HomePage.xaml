@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="odev3son.HomePage"
+             Title="Ana Sayfa"
+             BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#000000}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="20">
+            <!-- Başlık -->
+            <Label Text="ÖDEV-3"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#6200EE"/>
+               <!-- Profil Fotoğrafı ve Bilgiler -->
+            <VerticalStackLayout Spacing="15"
+                               HorizontalOptions="Center">
+                <!-- Profil Fotoğrafı - KARE -->
+                <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#2D2D2D}"
+                       BorderColor="#6200EE"
+                       HasShadow="True"
+                       Padding="2"
+                       WidthRequest="140"
+                       HeightRequest="140">
+                    <Image Source="profile.png"
+                           Aspect="AspectFill"
+                           WidthRequest="140"
+                           HeightRequest="140"/>
+                </Frame>
+
+                <!-- Ad Soyad -->
+                <Label Text="Sümeyye Çakır"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#000000, Dark=White}"/>
+
+                <!-- Numara -->
+                <Label Text="23010310021"
+                       FontSize="18"
+                       TextColor="{AppThemeBinding Light=#333333, Dark=#CCCCCC}"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Üniversite Bilgisi -->
+            <VerticalStackLayout Spacing="5"
+                               HorizontalOptions="Center">
+                <Label Text="Bartın Üniversitesi"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#000000, Dark=White}"/>
+
+                <Label Text="Bilgisayar Mühendisliği Bölümü"
+                       FontSize="16"
+                       TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
